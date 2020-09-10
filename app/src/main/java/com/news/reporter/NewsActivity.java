@@ -131,6 +131,9 @@ public class NewsActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 String link = myList.get(position).getLink();
                 Toast.makeText(NewsActivity.this, "Link :"+link, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NewsActivity.this, WebActivityLoader.class);
+                intent.putExtra("mURL", link);
+                startActivity(intent);
             }
         });
     }
