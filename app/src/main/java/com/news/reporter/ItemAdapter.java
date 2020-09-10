@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -59,14 +61,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.item_source.setText(currentItem.getSource());
         //holder.item_image.setImageResource(R.drawable.ic_android);
 
-        final String imgURL = currentItem.getImgUrl();
-        new Thread(new Runnable() {
+        Picasso.get().load(currentItem.getImgUrl()).into(holder.item_image);
+
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.i("Run", "HLO DEERE"+imgURL);
-                putImageOn(imgURL, holder);
+                for(int i = 0; i < mItemList.size(); i++)   {
+                    NewsContent NC = mItemList.get(i);
+                    String imgURL = NC.getImgUrl();
+                    putImageOn(imgURL, holder);
+                }
             }
-        }).start();
+        }).start();*/
 
     }
 
