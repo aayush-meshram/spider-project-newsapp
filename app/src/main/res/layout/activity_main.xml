@@ -8,32 +8,28 @@
     android:background="@color/electricBlue"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PUNGU"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/mTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="313dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="275dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/title"
-        android:padding="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        android:textSize="25sp" />
 
     <EditText
+        android:hint="Search"
+        android:textColorHint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans"
         android:id="@+id/mEdit"
+        android:inputType="text"
         android:textColor="@color/white"
         android:layout_below="@id/mTitle"/>
 

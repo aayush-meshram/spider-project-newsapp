@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -33,6 +34,7 @@ public class NewsActivity extends AppCompatActivity {
     public RecyclerView mRecyclerView;
     public ItemAdapter mAdapter;
     public RecyclerView.LayoutManager mLayoutManager;
+    public TextView textView;
     public ArrayList<NewsContent> myList = new ArrayList<>();
     private static final String API_KEY = "229e28237bb54c44800483085d646181";
     public boolean FLAG_UPDATE = false;
@@ -45,7 +47,8 @@ public class NewsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         search = intent.getStringExtra("searchQuery");
-
+        textView = findViewById(R.id.textView);
+        textView.setText("Your search result for: "+search);
 
 
 
@@ -56,7 +59,7 @@ public class NewsActivity extends AppCompatActivity {
             addContentToRecyclerView(myList);
         }
         else    {
-            makeApiCall(search, false);
+            makeApiCall(search);
             Toast.makeText(this, "else me ->"+myList, Toast.LENGTH_SHORT).show();
         }
 
@@ -69,7 +72,7 @@ public class NewsActivity extends AppCompatActivity {
 
     }
 
-    public void makeApiCall(String text, final boolean forUpdate) {
+    public void makeApiCall(final String text) {
         Calendar c = Calendar.getInstance();
         int D = c.get(Calendar.DAY_OF_MONTH) - 1;
         int Y = c.get(Calendar.YEAR) - 1;
@@ -85,6 +88,11 @@ public class NewsActivity extends AppCompatActivity {
 
                     String status = response.getString("status");
                     String no = response.getString("totalResults");
+                    if(Integer.parseInt(no) == 0)   {
+                        textView.setText("Sorry! No search result for: "+text);
+                        Toast.makeText(NewsActivity.this, "Press back to try again", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     Toast.makeText(NewsActivity.this, "status: " + status + " no: " + no, Toast.LENGTH_SHORT).show();
                     JSONArray articles = response.getJSONArray("articles");
                     for (int i = 0; i < articles.length(); i++) {
@@ -129,6 +137,7 @@ public class NewsActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+
                 String link = myList.get(position).getLink();
                 Toast.makeText(NewsActivity.this, "Link :"+link, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NewsActivity.this, WebActivityLoader.class);

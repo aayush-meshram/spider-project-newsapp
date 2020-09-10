@@ -38,6 +38,7 @@ public class WebActivityLoader extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setAllowContentAccess(true);
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
 
     }
 }
