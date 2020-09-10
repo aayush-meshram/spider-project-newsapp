@@ -24,8 +24,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .withAfterLogoText("For the benefit of all")
                 .withLogo(R.mipmap.ic_launcher_round);
 
-        Typeface OpenSans = Typeface.createFromAsset(getAssets(), "open_sans.ttf");
-        config.getBeforeLogoTextView().setTypeface(OpenSans);
+        /*Typeface OpenSans = Typeface.create("ope);
+        config.getBeforeLogoTextView().setTypeface(OpenSans);*/
 
         config.getBeforeLogoTextView().setTextColor(getResources().getColor(R.color.white));
         config.getAfterLogoTextView().setTextColor(getResources().getColor(R.color.white));

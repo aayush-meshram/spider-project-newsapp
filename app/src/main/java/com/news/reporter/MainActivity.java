@@ -2,6 +2,7 @@ package com.news.reporter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,11 +24,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEdit;
     public TextView selectedText;
     private ImageButton mButton;
-    private static final String API_KEY = "229e28237bb54c44800483085d646181";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +53,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String editText = mEdit.getText().toString();
-                makeApiCall(editText);
+                selectedText.setText(editText);
+                jumpToNewsActivity(editText);
             }
         });
 
     }
 
-    public void makeApiCall(String text)    {
+    /*public void makeApiCall(String text)    {
         Calendar c = Calendar.getInstance();
         int D = c.get(Calendar.DAY_OF_MONTH)-1;
         int Y = c.get(Calendar.YEAR)-1;
         int M = c.get(Calendar.MONTH)-1;
-        String url = "http://newsapi.org/v2/everything?q="+text+"&from=2020-08-07"+Y+"-"+M+"-"+D+"-"+"&sortBy=publishedAt&apiKey="+API_KEY;
+
+        final List<NewsContent> contentList = new ArrayList<>();
+
+        String url = "https://newsapi.org/v2/everything?q="+text+"&from="+Y+"-"+M+"-"+D+"-"+"&sortBy=publishedAt&apiKey="+API_KEY;
         RequestQueue mQueue = Volley.newRequestQueue(this);
+        Toast.makeText(this, "AA GAYA ANDAR", Toast.LENGTH_SHORT).show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -70,7 +78,20 @@ public class MainActivity extends AppCompatActivity {
                     String status = response.getString("status");
                     String no = response.getString("totalResults");
                     Toast.makeText(MainActivity.this, "status: "+status+" no: "+no, Toast.LENGTH_SHORT).show();
-                    mEdit.setText("status: "+status+" no: "+no);
+                    JSONArray articles = response.getJSONArray("articles");
+                    for(int i = 0; i < articles.length(); i++)  {
+                        if(i >= 10)
+                            break;
+                        JSONObject main = articles.getJSONObject(i);
+                        String title = main.getString("title");
+                        String link = main.getString("url");
+                        String imgUrl = main.getString("urlToImage");
+                        JSONObject s = main.getJSONObject("source");
+                        String source = s.getString("name");
+                        NewsContent contentSetter = new NewsContent(title, imgUrl, link, source);
+                        contentList.add(contentSetter);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -79,9 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(MainActivity.this, "GADBAD ho gayi"+error.getCause(), Toast.LENGTH_SHORT).show();
                     }
                 });
+        mQueue.add(request);
+    }*/
 
+    public void jumpToNewsActivity(String text) {
+        Intent intent = new Intent(this, NewsActivity.class);
+        intent.putExtra("searchQuery", text);
+        startActivity(intent);
     }
 }
