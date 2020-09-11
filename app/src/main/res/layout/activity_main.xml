@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/electricBlue"
     tools:context=".MainActivity">
 
@@ -18,12 +17,15 @@
         android:layout_marginTop="275dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/title"
+        android:paddingStart="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white"
         android:textSize="25sp" />
 
     <EditText
         android:hint="Search"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColorHint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,5 +42,13 @@
         android:layout_below="@id/mEdit"
         android:layout_centerHorizontal="true"
         android:src="@drawable/submit_button"/>
+
+    <ImageButton
+        android:layout_width="414dp"
+        android:layout_height="52dp"
+        android:src="@drawable/second_activity_button"
+        android:id="@+id/secondActivityButton"
+        android:onClick="startCountryActivity"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

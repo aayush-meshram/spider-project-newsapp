@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private EditText mEdit;
     private ImageButton mButton;
+    private ImageButton button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewsActivity.class);
         intent.putExtra("searchQuery", text);
         startActivity(intent);
+    }
+
+    public void startCountryActivity(View view) {
+        Intent intent = new Intent(this, CountryActivity.class);
     }
 }

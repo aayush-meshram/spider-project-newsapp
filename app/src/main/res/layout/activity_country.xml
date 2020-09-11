@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/electricBlue"
+    android:padding="16dp"
+    tools:context=".CountryActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="232dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Enter your country"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/searchText"
+        android:fontFamily="@font/open_sans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="275dp"
+        android:paddingStart="16dp"
+        android:hint="Enter country"
+        android:paddingEnd="16dp" />
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="46dp"
+        android:id="@+id/searchButton"
+        android:layout_below="@id/searchText"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/submit_button"/>
+
+</RelativeLayout>
